@@ -3,11 +3,11 @@ import * as Post from "../data/post.js";
 
 const router = express.Router();
 
-router.get("/posts", (req, res) => {
+router.get("/", (req, res) => {
   res.status(200).json(Post.getPosts());
 });
 
-router.get("/posts/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   const post = Post.getPostById(+req.params.id);
   if (!post) {
     return res.status(404).json({ message: "Post not found!" });
@@ -16,10 +16,10 @@ router.get("/posts/:id", (req, res) => {
   res.status(200).json(post);
 });
 
-router.post("/posts", (req, res) => {});
+router.post("/", (req, res) => {});
 
-router.put("/posts/:id", (req, res) => {});
+router.put("/:id", (req, res) => {});
 
-router.delete("/posts/:id", (req, res) => {});
+router.delete("/:id", (req, res) => {});
 
 export default router;
