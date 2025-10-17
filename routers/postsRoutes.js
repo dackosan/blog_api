@@ -3,6 +3,7 @@ import * as Post from "../data/post.js";
 import * as User from "../data/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import auth from "../util/authentication.js";
 
 const router = express.Router();
 
@@ -85,16 +86,6 @@ router.post("/login", (req, res) => {
   res.json({ token: token });
 });
 
-router.get("/my", (req, res) => {});
-
-function auth(req, res, next) {
-  const accessToken = req.header.authorize;
-  if (!accessToken) {
-    return res.status(401).json({ message: "Unauthorized!" });
-  }
-
-  console.log(accessToken);
-  const token = jwt.verify(accessToken, "secret_key");
-}
+router.get("/my", auth, (req, res) => {});
 
 export default router;
